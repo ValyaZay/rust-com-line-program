@@ -5,13 +5,13 @@ use com_line_program::Config;
 fn main() {
     let args: Vec<String> = env::args().collect();
     let config = Config::build(&args).unwrap_or_else(|err| {//will return either ok or err - 2 possible outcomes
-        println!("Problem parsing arguments: {err}");
+        eprintln!("Problem parsing arguments: {err}");
         process::exit(1);
     });
     println!("Searching for '{0}' in file {1}: \n", config.query, config.file_path);
 
     if let Err(e) = com_line_program::run(config) { //'run' doesn't have a value to unwrap, so 'unwrap_or_else' cannot be used here
-        println!("Application error: {e}");
+        eprintln!("Application error: {e}");
         process::exit(1);
     }
 
@@ -35,3 +35,6 @@ fn main() {
 
    
 }
+
+// cargo run -- To poem.txt > output.txt
+// cargo run > output.txt
