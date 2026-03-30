@@ -8,8 +8,7 @@ fn main() {
         println!("Problem parsing arguments: {err}");
         process::exit(1);
     });
-    println!("Searching for {}", config.query);
-    println!("In file {}", config.file_path);
+    println!("Searching for '{0}' in file {1}: \n", config.query, config.file_path);
 
     if let Err(e) = com_line_program::run(config) { //'run' doesn't have a value to unwrap, so 'unwrap_or_else' cannot be used here
         println!("Application error: {e}");
