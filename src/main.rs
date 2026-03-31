@@ -1,10 +1,11 @@
 use std::env;
+use std::env::Args;
 use std::process;
 use com_line_program::Config;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let config = Config::build(&args).unwrap_or_else(|err| {//will return either ok or err - 2 possible outcomes
+    let args: Args = env::args();
+    let config = Config::build(args).unwrap_or_else(|err| {//will return either ok or err - 2 possible outcomes
         eprintln!("Problem parsing arguments: {err}");
         process::exit(1);
     });
