@@ -41,26 +41,12 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 }
 
 pub fn search_case_sensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut results = Vec::new();
-
-    for line in contents.lines(){
-        if line.contains(query) {
-            results.push(line.trim());
-        }
-    }
-    results
+    contents.lines().filter(|l| l.contains(query)).map(|l| l.trim()).collect()
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let query = query.to_lowercase();
-    let mut results = Vec::new();
-
-    for line in contents.lines(){
-        if line.to_lowercase().contains(&query) {
-            results.push(line.trim());
-        }
-    }
-    results
+    contents.lines().filter(|l| l.to_lowercase().contains(&query)).map(|l| l.trim()).collect()
 }
 
 #[cfg(test)]
